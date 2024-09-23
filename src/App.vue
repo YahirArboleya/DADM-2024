@@ -2,13 +2,24 @@
   import {ref} from 'vue';
   //Modelo
   const header = ref('App lista de compras');
+  const items = ref([
+    {id:'0', label:'10 Bolillos'},
+    {id: '1', label:'1 Lata de frijoles'},
+    {id: '2', label:'1 Chelas'},
+    {id: '3',label:'1 Nutella'}
+  ]);
 </script>
 
 <template>
   <h1>
     <i class="material-icons shopping-cart-icon">local_mall</i>
     {{ header }} 
-    </h1>
+  </h1>
+
+  <ul>
+    <li v-for="item in items" v-bind:key="item.id">  🛒 {{ item.label }}</li>
+  </ul>
+
 </template>
 
 <style scoped>
