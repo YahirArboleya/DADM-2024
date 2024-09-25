@@ -3,10 +3,10 @@
   //Modelo
   const header = ref('App lista de compras');
   const items = ref([
-    {id:'0', label:'10 Bolillos'},
+    {id: '0', label:'10 Bolillos'},
     {id: '1', label:'1 Lata de frijoles'},
     {id: '2', label:'1 Chelas'},
-    {id: '3',label:'1 Nutella'}
+    {id: '3', label:'1 Nutella'}
   ]);
 </script>
 
@@ -17,7 +17,7 @@
   </h1>
 
   <ul>
-    <li v-for="item in items" v-bind:key="item.id">  🛒 {{ item.label }}</li>
+    <li v-for=" { label, id } in items " v-bind:key="id">  🛒 {{ label }} </li>
   </ul>
 
 </template>
