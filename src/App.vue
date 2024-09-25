@@ -8,6 +8,9 @@
     {id: '2', label:'1 Chelas'},
     {id: '3', label:'1 Nutella'}
   ]);
+
+  const newItem = ref('');
+
 </script>
 
 <template>
@@ -16,8 +19,10 @@
     {{ header }} 
   </h1>
 
+  <input v-model="newItem" type="text" placeholder="Agregar Artículo"> {{ newItem }}
+
   <ul>
-    <li v-for=" { label, id } in items " v-bind:key="id">  🛒 {{ label }} </li>
+    <li v-for="item in items" v-bind:key="item.id">  🛒 {{ item.label }} </li>
   </ul>
 
 </template>
