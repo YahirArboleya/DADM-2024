@@ -10,7 +10,7 @@
   ]);
 
   const newItem = ref('');
-  const newItemPriority = ref('low');
+  const newItemPriority = ref('');
 
 </script>
 
@@ -20,12 +20,13 @@
     {{ header }} 
   </h1>
 
-  <input v-model="newItem" type="text" placeholder="Agregar Artículo">
+  <input v-model="newItem" type="text" placeholder="Agregar Artículo"  v-model.trim="newItem">
 
-  <!--Ratio buttons-->
-  <label><input type="radio" value="low" v-model="newItemPriority">Baja</label>
-  <label><input type="radio" value="hight" v-model="newItemPriority">Alta</label>
-  {{ newItemPriority == 'low'? '❤️':'⭐'  }}
+  <!-- Radio Buttons -->
+  <label><input type="radio" v-model="newItemPriority" value="low">Low</label>
+  <label><input type="radio" v-model="newItemPriority" value="high">High</label>
+  {{ newItemPriority }}
+
 
   <ul>
     <li v-for="item in items" v-bind:key="item.id">  🛒 {{ item.label }} </li>
