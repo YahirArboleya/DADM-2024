@@ -9,7 +9,6 @@
     {id: '3', label:'1 Nutella'}
   ]);
 
-//REFERENCIAS DE VARIABLES
 
   const newItem = ref('');
   const newItemPriority = ref('');
