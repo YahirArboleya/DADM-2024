@@ -12,6 +12,7 @@
 
   const newItem = ref('');
   const newItemHighPriority = ref(false);
+  const iceCreamFlavors = ref([]);
 
 </script>
 
@@ -25,6 +26,25 @@
   <!-- Radio Buttons -->
   <label><input type="checkbox" v-model="newItemHighPriority">Alta Prioridad</label>
   {{ newItemHighPriority }}
+
+  <!-- Helados -->
+  <label>
+		<input type="checkbox" v-model="iceCreamFlavors" value="vanilla">
+		Vanilla
+	</label>
+  <label>
+		<input type="checkbox" v-model="iceCreamFlavors" value="chocolate">
+		Chocolate
+	</label>
+  <label>
+		<input type="checkbox" v-model="iceCreamFlavors" value="strawnerry">
+		Strawberry
+	</label>
+  {{iceCreamFlavors}}
+  <!-- Lista -->
+  <ul>
+
+  </ul>
 
 
   <ul>
