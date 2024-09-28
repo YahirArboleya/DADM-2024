@@ -11,7 +11,7 @@
 
 
   const newItem = ref('');
-  const newItemPriority = ref('');
+  const newItemHighPriority = ref(false);
 
 </script>
 
@@ -21,12 +21,10 @@
     {{ header }} 
   </h1>
 
-  <input v-model="newItem" type="text" placeholder="Agregar Artículo"  v-model.trim="newItem">
-
+  <input type="text" placeholder="Add Item" v-model.trim="newItem">
   <!-- Radio Buttons -->
-  <label><input type="radio" v-model="newItemPriority" value="low">Low</label>
-  <label><input type="radio" v-model="newItemPriority" value="high">High</label>
-  {{ newItemPriority }}
+  <label><input type="checkbox" v-model="newItemHighPriority">Alta Prioridad</label>
+  {{ newItemHighPriority }}
 
 
   <ul>
