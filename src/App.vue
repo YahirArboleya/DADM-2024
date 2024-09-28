@@ -14,6 +14,9 @@ const newItemHighPriority = ref(false);
 </script>
 
 <template>
+
+<div class="add-item form">
+
   <h1>{{ header }}</h1>
   <input v-model.trim="newItem" type="text" placeholder="Add Item" />
   <!-- Caja de seleccion de prioridad -->
@@ -21,10 +24,16 @@ const newItemHighPriority = ref(false);
     <input type="checkbox" v-model="newItemHighPriority">
     High Priority
   </label>
+  <button class="btn btn-primary"
+  v-on:click="items.push({id: items.length + 1, label: newItem})">Salvar Articulo</button>
+
+</div>
+
   <!-- Lista -->
   <ul>
     <li v-for="({ id, label }, index) in items" key="id">⚜ {{ label }}</li>
   </ul>
+
 </template>
 
 <style scoped>
