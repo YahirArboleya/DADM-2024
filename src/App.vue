@@ -2,21 +2,35 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref } from "vue";
-
+//Modelo
 const header = ref("🛒 Shopping List App");
+// --- items ---
+//item model
 const items = ref([
   { id: 1, label: "10 bolillos" },
   { id: 2, label: "1 lata de frijoles" },
   { id: 3, label: "2 lata de atún" },
 ]);
-const newItem = ref("");
+
+// item method
+const saveItem = () =>{
+  items.value.push({id: items.value.length + 1, label: newItem.value});
+  //Clean the input
+  newItem.value = '';
+}
+
+const newItem = ref('');
 const newItemHighPriority = ref(false);
 </script>
 
 <template>
 
 <!-- Agrupando en un div las entradas -->
-<form v-on:submit.prevent="items.push({ id: items.length + 1, label: newItem })" class="add-item fomr">
+<h1>
+    <i class="material-icons shopping-cart-icon">local_mall</i>
+    {{ header }} 
+    </h1>
+<form v-on:submit.prevent="saveItem()" class="add-item fomr">
     <!-- entrada de texto -->
     <input
       v-model.trim="newItem"
