@@ -43,7 +43,8 @@ const activateEdition = (activate) => {
 
 
 <!--Colocando un hiperlink-->
-  <a v-bind:href= "'https://' + newItem " target="_blank">{{ newItem == ''? '💕 Link': newItem}}</a>
+  <a v-bind:href= "newItem === '' ? 'https://www.google.com' : 'http://' + newItem" target="_blank">
+    {{ newItem == ''? '💕 Link': newItem}}</a>
 
   <!-- Formulario -->
   <!-- v-on:submit.prevent para evitar el envío del formulario cuando se presiona Enter-->
