@@ -29,6 +29,14 @@ const activateEdition = (activate) => {
   editing.value = activate;
 }
 
+const getLink = () => {
+  return newItem.value === '' ? 'https://www.google.com' : 'http://' + newItem.value;
+};
+
+const getLinkText = () => {
+  return newItem.value === '' ? '💕 Link' : newItem.value;
+};
+
 </script>
 
 <template>
@@ -43,8 +51,9 @@ const activateEdition = (activate) => {
 
 
 <!--Colocando un hiperlink-->
-  <a v-bind:href= "newItem === '' ? 'https://www.google.com' : 'http://' + newItem" target="_blank">
-    {{ newItem == ''? '💕 Link': newItem}}</a>
+<a :href="getLink()" target="_blank">
+    {{ getLinkText() }}
+  </a>
 
   <!-- Formulario -->
   <!-- v-on:submit.prevent para evitar el envío del formulario cuando se presiona Enter-->
