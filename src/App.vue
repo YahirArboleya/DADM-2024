@@ -88,12 +88,20 @@ v-if="editing">
     </button>
   </form>
 
-  <!-- Lista -->
+  <!-- Lista clases con objetos -->
   <ul>
     <li v-for = "{label, id, purchased, priority} in items" 
     :key = "id"
     :class = "{strikeout: purchased, priority : priority}"
     class = "amazing"
+    >{{ priority ? "💥" : "🔴"}} {{ label }}</li>
+  </ul>
+
+  <!--Listas clases con arreglos-->
+  <ul>
+    <li v-for = "{label, id, purchased, priority} in items" 
+    :key = "id"
+    :class = "[purchased ? 'strikeout':'', priority ? 'priority':'']"
     >{{ priority ? "💥" : "🔴"}} {{ label }}</li>
   </ul>
 
