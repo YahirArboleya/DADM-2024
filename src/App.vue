@@ -51,9 +51,13 @@ const getLinkText = () => {
 
 
 <!--Colocando un hiperlink-->
+
+<!--
 <a :href="getLink()" target="_blank">
     {{ getLinkText() }}
   </a>
+-->
+
 
   <!-- Formulario -->
   <!-- v-on:submit.prevent para evitar el envío del formulario cuando se presiona Enter-->
@@ -75,7 +79,8 @@ v-if="editing">
     </label>
     <!-- Boton -->
     <button
-      class="btn btn-primary"
+    :disabled="newItem.length === 0"
+    class="btn btn-primary"
     >
       Save Item
     </button>
