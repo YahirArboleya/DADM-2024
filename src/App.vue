@@ -7,9 +7,11 @@ const header = ref("Shopping List App");
 // --- items ---
 //item model
 const items = ref([
-  { id: 1, label: "10 bolillos" },
-  { id: 2, label: "1 lata de frijoles" },
-  { id: 3, label: "2 lata de atún" },
+  { id: 1, label: "10 bolillos", purchased: false, priority : true },
+  { id: 2, label: "1 lata de frijoles", purchased: true, priority : true },
+  { id: 3, label: "2 lata de atún", purchased: true, priority : true },
+  { id: 4, label: "1/2 lata de pan", purchased: false, priority : false },
+  { id: 5, label: "1/4 lata de pan", purchased: false, priority : true },
 ]);
 
 // item method
@@ -88,7 +90,11 @@ v-if="editing">
 
   <!-- Lista -->
   <ul>
-    <li v-for="({ id, label }, index) in items" key="id">⚜ {{ label }}</li>
+    <li v-for = "{label, id, purchased, priority} in items" 
+    :key = "id"
+    :class = "{strikeout: purchased, priority : priority}"
+    class = "amazing"
+    >{{ priority ? "💥" : "🔴"}} {{ label }}</li>
   </ul>
 
   <p v-if="items.length === 0">🥀 NO HAY ELEMENTOS EN LA LISTA 🥀</p>
