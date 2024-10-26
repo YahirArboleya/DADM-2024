@@ -39,6 +39,11 @@ const getLinkText = () => {
   return newItem.value === '' ? '💕 Link' : newItem.value;
 };
 
+// Alternando estado de compra del item
+const togglePurchased = (item) => {
+  item.purchased = !item.purchased;
+};
+
 </script>
 
 <template>
@@ -90,19 +95,14 @@ v-if="editing">
 
   <!-- Lista clases con objetos -->
   <ul>
-    <li v-for = "{label, id, purchased, priority} in items" 
-    :key = "id"
-    :class = "{strikeout: purchased, priority : priority}"
-    class = "amazing"
-    >{{ priority ? "💥" : "🔴"}} {{ label }}</li>
-  </ul>
-
-  <!--Listas clases con arreglos-->
-  <ul>
-    <li v-for = "{label, id, purchased, priority} in items" 
-    :key = "id"
-    :class = "[purchased ? 'strikeout':'', priority ? 'priority':'']"
-    >{{ priority ? "💥" : "🔴"}} {{ label }}</li>
+    <li
+      v-for="({ id, label, purchased, priority }, index) in items"
+      @click="togglePurchased(items[index])"
+      v-bind:key="id"
+      :class="{ strikeout: purchased, priority: highPriority }"
+    >
+      ⚜ {{ label }}
+    </li>
   </ul>
 
   <p v-if="items.length === 0">🥀 NO HAY ELEMENTOS EN LA LISTA 🥀</p>
