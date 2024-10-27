@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const header = ref("Shopping List App");
 
@@ -46,6 +46,11 @@ const togglePurchased = (item) => {
   item.purchased = !item.purchased;
 };
 
+const characterCount = computed(()=>{
+  // Toda propiedad computada debe regresar un valor
+  return newItem.value.length;
+});
+
 </script>
 
 <template>
@@ -68,6 +73,10 @@ const togglePurchased = (item) => {
     <button :disabled="newItem.length === 0" class="btn btn-primary">
       Save Item
     </button>
+    	<!-- Contador -->
+  <p class="counter">
+    {{ characterCount }} / 200
+  </p>
   </form>
 
   <!-- Lista de items -->
