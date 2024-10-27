@@ -1,45 +1,47 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref } from "vue";
-//Modelo
+
 const header = ref("Shopping List App");
-// --- items ---
-//item model
+
+// Lista de items con prioridad y estado de compra
 const items = ref([
-  { id: 1, label: "10 bolillos", purchased: false, priority : true },
-  { id: 2, label: "1 lata de frijoles", purchased: true, priority : true },
-  { id: 3, label: "2 lata de atún", purchased: true, priority : true },
-  { id: 4, label: "1/2 lata de pan", purchased: false, priority : false },
-  { id: 5, label: "1/4 lata de pan", purchased: false, priority : true },
+  { id: 1, label: "10 bolillos", purchased: false, priority: true },
+  { id: 2, label: "1 lata de frijoles", purchased: true, priority: true },
+  { id: 3, label: "2 lata de atún", purchased: true, priority: true },
+  { id: 4, label: "1/2 lata de pan", purchased: false, priority: false },
+  { id: 5, label: "1/4 lata de pan", purchased: false, priority: true },
 ]);
 
-// item method
-const saveItem = () =>{
-  items.value.push({id: items.value.length + 1, label: newItem.value});
-  //Clean the input
-  newItem.value = '';
-}
-
-
-
-//formulario
-const newItem = ref('');
+// Variables del formulario para el nuevo item
+const newItem = ref("");
 const newItemHighPriority = ref(false);
-const editing = ref(true);
-const activateEdition = (activate) => {
-  editing.value = activate;
-}
+const editing = ref(false);
 
-const getLink = () => {
-  return newItem.value === '' ? 'https://www.google.com' : 'http://' + newItem.value;
+// Guardar un nuevo item en la lista
+const saveItem = () => {
+  if (newItem.value.trim()) {
+    items.value.push({
+      id: items.value.length + 1,
+      label: newItem.value,
+      priority: newItemHighPriority.value,
+      purchased: false,
+    });
+    newItem.value = ""; // Limpiar el campo después de guardar
+    newItemHighPriority.value = false;
+    editing.value = false; // Cerrar el formulario después de guardar
+  }
 };
 
-const getLinkText = () => {
-  return newItem.value === '' ? '💕 Link' : newItem.value;
+// Alternar el estado de edición para abrir/cerrar el formulario
+const toggleEditing = () => {
+  editing.value = !editing.value;
+  if (!editing.value) {
+    newItem.value = ""; // Limpiar campos cuando se cierra el formulario
+    newItemHighPriority.value = false;
+  }
 };
 
-// Alternando estado de compra del item
+// Alternar el estado de "comprado" de un item
 const togglePurchased = (item) => {
   item.purchased = !item.purchased;
 };
@@ -47,67 +49,42 @@ const togglePurchased = (item) => {
 </script>
 
 <template>
-<div class="header">
-  <h1>
-    <i class="material-icons shopping-cart-icon">local_mall</i>
-    {{ header }}
+  <div class="header">
+    <h1>
+      <i class="material-icons shopping-cart-icon">local_mall</i>
+      {{ header }}
     </h1>
-    <button v-if="editing" class="btn" @click="activateEdition(false)">Cancelar</button>
-    <button v-else class="btn btn-primary" @click="activateEdition(true)">Agregar Artículo</button>
-</div>
+    <button v-if="editing" class="btn" @click="toggleEditing">Cancelar</button>
+    <button v-else class="btn btn-primary" @click="toggleEditing">Agregar Artículo</button>
+  </div>
 
-
-<!--Colocando un hiperlink-->
-
-<!--
-<a :href="getLink()" target="_blank">
-    {{ getLinkText() }}
-  </a>
--->
-
-
-  <!-- Formulario -->
-  <!-- v-on:submit.prevent para evitar el envío del formulario cuando se presiona Enter-->
-
-<form 
-v-on:submit.prevent="saveItem()" 
-class="add-item fomr"
-v-if="editing">
-    <!-- entrada de texto -->
-    <input
-      v-model.trim="newItem"
-      type="text"
-      placeholder="Add Item"
-    />
-    <!-- Caja de seleccion de prioridad -->
+  <!-- Formulario para añadir items -->
+  <form v-if="editing" @submit.prevent="saveItem" class="add-item form">
+    <input v-model="newItem" type="text" placeholder="Add Item" />
     <label>
       <input type="checkbox" v-model="newItemHighPriority" />
       High Priority
     </label>
-    <!-- Boton -->
-    <button
-    :disabled="newItem.length === 0"
-    class="btn btn-primary"
-    >
+    <button :disabled="newItem.length === 0" class="btn btn-primary">
       Save Item
     </button>
   </form>
 
-  <!-- Lista clases con objetos -->
+  <!-- Lista de items -->
   <ul>
     <li
-      v-for="({ id, label, purchased, priority }, index) in items"
-      @click="togglePurchased(items[index])"
-      v-bind:key="id"
-      :class="{ strikeout: purchased, priority: highPriority }"
+      v-for="item in items"
+      :key="item.id"
+      @click="togglePurchased(item)"
+      :class="{ strikeout: item.purchased, priority: item.priority }"
     >
-      ⚜ {{ label }}
+      ⚜ {{ item.label }}
     </li>
   </ul>
 
   <p v-if="items.length === 0">🥀 NO HAY ELEMENTOS EN LA LISTA 🥀</p>
-
 </template>
+
 
 <style scoped>
 
