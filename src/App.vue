@@ -1,6 +1,6 @@
 <script setup>
   import PlanPicker from './components/PlanPicker.vue';
-  import PlanItem from './components/PlanPickerItem.vue';
+  import PlanPickerItem from './components/PlanPickerItem.vue';
 </script>
 
 <template>
