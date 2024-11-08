@@ -1,5 +1,6 @@
 <script setup>
   import PlanPicker from './components/PlanPicker.vue';
+  import PlanItem from './components/PlanPickerItem.vue';
 </script>
 
 <template>
@@ -18,6 +19,7 @@
     </h2>
     
     <PlanPicker />
+
 
   </div>
 </template>
