@@ -2,14 +2,15 @@
   <div @click="selectedPlan" class="plan">
     <div class="description">
       <span class="title">
-        {{ name }} {{ selected ? '🌟': '💥'}}
+        {{ name }} {{ selected ? '🌟': ''}}
       </span>
     </div>
   </div>
 </template>
 
 <script setup>
-  import {ref} from 'vue';
+  //importamos la funcion para la propiedad computada
+  import { computed } from 'vue';
   //usando un macro
   //defenir las props
   //defineProps(['name','planIcon']);
@@ -17,20 +18,24 @@
     name: {
       type: String,
       required: true
-    }
+    },
+    selectPlan: String
+    
   });
   
   //definir eventos
   const emit = defineEmits(['select']);
-  //variable que permite recordar si el plan ha sido seleccionado
-  const selected = ref(false);
   //funcion que permimte cambiar el valor de la variable
   const selectedPlan = () => {
-    selected.value = true;
     //plan ha sido seleciconado
     emit('select', props.name);
   };
 
+  //creando una propiedad computada para 
+  //saber si el plan ha sido seleccionado
+  const isSelected = computed(() => {
+    return props.name === props.selectedPlan;
+  });
 
 
 </script>
