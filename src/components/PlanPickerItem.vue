@@ -2,7 +2,7 @@
   <div @click="selectedPlan" class="plan">
     <div class="description">
       <span class="title">
-        {{ name }} {{ selected ? '🌟': ''}}
+        {{ name }} {{ isSelected ? '🌟': ''}}
       </span>
     </div>
   </div>
@@ -34,7 +34,7 @@
   //creando una propiedad computada para 
   //saber si el plan ha sido seleccionado
   const isSelected = computed(() => {
-    return props.name === props.selectedPlan;
+    return props.name === props.selectPlan;
   });
 
 

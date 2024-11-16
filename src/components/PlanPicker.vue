@@ -21,7 +21,7 @@
       :key="plan" 
       :name="plan"
       @select="selectPlan"
-      :select-plan="selectedPlan"/>
+      :selectPlan="selectedPlan"/>
     </div>
     <p>{{selectedPlan}}</p>
 </template>
