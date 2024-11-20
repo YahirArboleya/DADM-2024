@@ -23,7 +23,6 @@
       @select="selectPlan"
       :selectPlan="selectedPlan"/>
     </div>
-    <p>{{selectedPlan}}</p>
 </template>
 
 
