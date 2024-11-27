@@ -1,6 +1,9 @@
 <script setup>
   import PlanPicker from './components/PlanPicker.vue';
-  import PlanPickerItem from './components/PlanPickerItem.vue';
+  import { ref } from 'vue';
+
+  const showPlans = ref(false);
+
 </script>
 
 <template>
@@ -17,8 +20,13 @@
     <h2 class="subtitle">
       Viajamos por el mundo para encontrar el mejor café de origen único para ti
     </h2>
+
+    <label>
+      <input type="checkbox" v-model="showPlans">
+      Mostrar selector de planes
+    </label>
     
-    <PlanPicker />
+    <PlanPicker v-if="showPlans"/>
 
 
   </div>
